@@ -37,7 +37,7 @@ ref - [OSCon on Spark](https://www.youtube.com/watch?v=x8xXXqvhZq8&list=RDQM977P
 
 ![[pics/Pasted image 20240605114403.png]]
 	- we have to just spin up yarn containers that would chain the map n reduce tasks and if we organize mem correctly we neednt hit the disk throught the process
-	- 
+	
 ![[pics/Pasted image 20240605114904.png]]
 	- Now why dont we do this for all the query at once ?.. so this introduced *Spark Streaming*
 	- Spark sql is used as a service --> where we leave the containers up (that is we keep them live) n with proper mem mngt we can exe all the queries without spinning up n down.. 
@@ -78,4 +78,3 @@ ref - [OSCon on Spark](https://www.youtube.com/watch?v=x8xXXqvhZq8&list=RDQM977P
 	- when dealing with lot of small files --> open , read, close files need disk io
 	- spatial locality is not being achieved => less performance
 	- solution ==> File Compaction
-	
