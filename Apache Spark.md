@@ -14,7 +14,7 @@ ref - [Spark Summit (Spark SQL)](https://www.youtube.com/watch?v=AoVmgzontXo&lis
 ## Spark
 ref - [OSCon on Spark](https://www.youtube.com/watch?v=x8xXXqvhZq8&list=RDQM977Pv-p1WSw&index=30)
 - Distributed programming operations : Broadcast, Take(Expensive, v have to be careful-->Driver is the bottleneck), DAG (transmitted from Driver to executer, inexpensive), Shuffle (req in join , grp by, reduce)
-- ![[Pasted image 20240605102837.png]]
+- ![[pics/Pasted image 20240605102837.png]]
 - no of shuffle objs is almost the product of no of map n reduce tasks
 - 100 map n 100 reducers , then we'll have 10,000 intermediate files --> all these files have to travel through the network, they all have to get serialized n de-serialized.. n might be they may need disk io too cuz mostly they cant fit into the mem..
 - long story short Shuffle is the *most expensive* operation..
@@ -28,17 +28,17 @@ ref - [OSCon on Spark](https://www.youtube.com/watch?v=x8xXXqvhZq8&list=RDQM977P
 - Before spark, DAGs weren't a part of execution engine (ig the quick lookup is a win here..)
 #### Before Spark :
 
-![[Pasted image 20240605114329.png]]
+![[pics/Pasted image 20240605114329.png]]
 	- input -> 1 mapper, 1 shuffle, 1 reducer -> output :--> so potentially only one join can be done..
 	- so we have to chain many of these
 	- shuffle n output required disk io
 	- map, reduce required spinning up n down the clusters (aka yarn containers)
 #### After Spark :
 
-![[Pasted image 20240605114403.png]]
+![[pics/Pasted image 20240605114403.png]]
 	- we have to just spin up yarn containers that would chain the map n reduce tasks and if we organize mem correctly we neednt hit the disk throught the process
 	- 
-![[Pasted image 20240605114904.png]]
+![[pics/Pasted image 20240605114904.png]]
 	- Now why dont we do this for all the query at once ?.. so this introduced *Spark Streaming*
 	- Spark sql is used as a service --> where we leave the containers up (that is we keep them live) n with proper mem mngt we can exe all the queries without spinning up n down.. 
 
@@ -46,7 +46,7 @@ ref - [OSCon on Spark](https://www.youtube.com/watch?v=x8xXXqvhZq8&list=RDQM977P
 
 ### Simple Code : 
 
-![[Pasted image 20240605113234.png]]
+![[pics/Pasted image 20240605113234.png]]
 - C - setting up context , T - transformation, A - Actions
 - explicit objects as funcs are sent through the wire(network) n getting invoked in the worker nodes
 - these objs get serialized n un-serialized .. 
