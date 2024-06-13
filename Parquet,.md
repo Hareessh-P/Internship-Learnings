@@ -1,5 +1,4 @@
 
-# Day __ (10/6/24)
 
 ### Paraquet form of data :
 - while reading from 
